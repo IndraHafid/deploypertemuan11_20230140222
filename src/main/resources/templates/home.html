@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Utama | NexusCore</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#090d16] text-slate-200 min-h-screen flex font-sans">
+
+<aside class="hidden lg:flex flex-col w-64 bg-slate-950 border-r border-slate-900 p-6 justify-between shrink-0">
+    <div class="space-y-8">
+        <div class="flex items-center space-x-2.5">
+            <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
+                <i data-lucide="layers" class="w-4 h-4 text-white"></i>
+            </div>
+            <span class="text-md font-bold tracking-wider text-white">NEXUS<span class="text-indigo-400 font-light">CORE</span></span>
+        </div>
+
+        <nav class="space-y-1">
+            <a href="#" class="flex items-center space-x-3 bg-indigo-600/10 text-indigo-400 px-4 py-2.5 rounded-lg text-sm font-medium border-l-2 border-indigo-500">
+                <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                <span>Dashboard</span>
+            </a>
+        </nav>
+    </div>
+
+    <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-900 flex items-center space-x-3">
+        <div class="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-sm" th:text="${#strings.substring(profile.nama,0,1)}">U</div>
+        <div class="overflow-hidden">
+            <p class="text-xs font-semibold text-white truncate" th:text="${profile.nama}">User Name</p>
+            <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full inline-block animate-ping"></span> Online
+                </span>
+        </div>
+    </div>
+</aside>
+
+<div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+
+    <header class="bg-slate-950/60 backdrop-blur-md border-b border-slate-900/80 h-16 px-6 flex justify-between items-center sticky top-0 z-20">
+        <h1 class="text-md font-semibold text-white flex items-center gap-2">
+            <i data-lucide="terminal" class="w-4 h-4 text-indigo-400"></i>
+            Terminal Kontrol Utama
+        </h1>
+
+        <form th:action="@{/logout}" method="POST">
+            <button type="submit"
+                    class="bg-slate-900 hover:bg-red-950/40 border border-slate-800 hover:border-red-900/50 text-slate-300 hover:text-red-400 px-4 py-1.5 rounded-lg text-xs font-semibold transition flex items-center space-x-2 cursor-pointer shadow-sm">
+                <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                <span>Selesai Sesi</span>
+            </button>
+        </form>
+    </header>
+
+    <main class="p-6 md:p-8 max-w-5xl w-full mx-auto space-y-8">
+
+        <div class="bg-gradient-to-r from-slate-900 via-indigo-950/30 to-purple-950/20 p-6 md:p-8 rounded-2xl border border-indigo-500/10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-1">
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
+                    Selamat Datang Kembali, <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent" th:text="${profile.nama}">Nama</span>!
+                </h2>
+                <p class="text-sm text-slate-400">Sistem memverifikasi identitas Anda dengan hak akses <span class="text-indigo-400 font-semibold font-mono">ROLE_USER</span>.</p>
+            </div>
+            <div class="text-xs bg-slate-950/80 border border-slate-800 px-4 py-2 rounded-xl text-slate-400 font-mono self-start md:self-auto">
+                IP Terbaca: <span class="text-emerald-400">127.0.0.1</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-slate-900/40 border border-slate-800/60 p-5 rounded-xl flex items-center space-x-4 shadow-sm">
+                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center"><i data-lucide="check-square" class="w-5 h-5"></i></div>
+                <div><p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Status Akun</p><p class="text-lg font-bold text-white">Terverifikasi</p></div>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800/60 p-5 rounded-xl flex items-center space-x-4 shadow-sm">
+                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center"><i data-lucide="activity" class="w-5 h-5"></i></div>
+                <div><p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Aktivitas Sistem</p><p class="text-lg font-bold text-white">Sangat Baik</p></div>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800/60 p-5 rounded-xl flex items-center space-x-4 shadow-sm">
+                <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center"><i data-lucide="lock" class="w-5 h-5"></i></div>
+                <div><p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Keamanan Kunci</p><p class="text-lg font-bold text-white">BCrypt 256bit</p></div>
+            </div>
+        </div>
+
+        <div class="bg-slate-900/30 border border-slate-900 rounded-2xl overflow-hidden shadow-lg">
+            <div class="bg-slate-950 p-5 border-b border-slate-900 flex items-center space-x-2">
+                <i data-lucide="fingerprint" class="w-5 h-5 text-indigo-400"></i>
+                <h3 class="text-sm font-bold text-white tracking-wide uppercase">Spesifikasi Metadata Pengguna</h3>
+            </div>
+
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-900/10">
+                <div class="space-y-4">
+                    <div class="border-b border-slate-900 pb-3">
+                        <span class="text-xs text-slate-500 font-medium uppercase tracking-wider block">Identitas Unik (UUID)</span>
+                        <span class="text-xs font-mono text-indigo-300 break-all" th:text="${user.id}">-</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 font-medium uppercase tracking-wider block">Nama Pengguna</span>
+                        <span class="text-sm font-semibold text-white font-mono" th:text="${user.username}">-</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="border-b border-slate-900 pb-3">
+                        <span class="text-xs text-slate-500 font-medium uppercase tracking-wider block">Nama</span>
+                        <span class="text-sm font-semibold text-white" th:text="${profile.nama}">-</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 font-medium uppercase tracking-wider block">Alamat Terpeta</span>
+                        <p class="text-sm text-slate-300 leading-relaxed" th:text="${profile.alamat}">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>
